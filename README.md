@@ -1,28 +1,28 @@
 # 🚀 Project 98 – Recommendation Engine | System Design Level | Full Stack DevOps
 
-[Java 17](https://img.shields.io/badge/Java-17-E76F00?logo=openjdk&logoColor=white)
-[Spring Boot 3.2.5](https://img.shields.io/badge/Spring%20Boot-3.2.5-6DB33F?logo=springboot&logoColor=white)
-[Caching](https://img.shields.io/badge/Caching-Caffeine%201000%20max%20600s%20expire%20Stats-blue?logo=redis&logoColor=white)
-[Cache Stats](https://img.shields.io/badge/Cache%20Stats-recordStats%20enabled-brightgreen)
-[Security](https://img.shields.io/badge/Security-Headers%20nosniff%20DENY%20XSS-red?logo=springsecurity&logoColor=white)
-[Builder Pattern](https://img.shields.io/badge/Builder%20Pattern-Recommendation.Builder%20Fluent%20API-success?logo=java&logoColor=white)
-[Strategy Pattern](https://img.shields.io/badge/Strategy%20Pattern-Collaborative%20vs%20Content%20vs%20Hybrid-yellow?logo=elasticsearch&logoColor=white)
-[Repository Pattern](https://img.shields.io/badge/Repository%20Pattern-JpaRepository-6DB33F)
-[H2 Database](https://img.shields.io/badge/H2-Database%20recommenddb-003545?logo=h2&logoColor=white)
-[viewCount](https://img.shields.io/badge/viewCount-Added%20%2B%20idx__user%20%2B%20idx__category-orange)
-[JUnit 5](https://img.shields.io/badge/JUnit-5%206%2F6%20Green-25A162?logo=junit5&logoColor=white)
-[Mockito](https://img.shields.io/badge/Mockito-Mocked%20Repo%20when%2Fverify-00BFFF)
-[Recommendation Pattern](https://img.shields.io/badge/Recommendation-Pattern%20Collaborative%20Content%20Hybrid-blueviolet?logo=elasticsearch&logoColor=white)
-[Docker](https://img.shields.io/badge/Docker-Multi--Stage-2496ED?logo=docker&logoColor=white)
-[Render](https://img.shields.io/badge/Render-Live%202m23s-brightgreen?logo=render&logoColor=white)
-[Tomcat](https://img.shields.io/badge/Apache%20Tomcat-10.1.20-D4AF00?logo=apachetomcat&logoColor=white)
-[Port](https://img.shields.io/badge/Port-8100-00BFFF)
-[Status](https://img.shields.io/badge/Status-Recommendation%20Engine%20Live%20Tier%2010-brightgreen)
-[Tier 10](https://img.shields.io/badge/Tier%2010-System%20Design%20Level%20SCALE-blueviolet)
+![Java 17](https://img.shields.io/badge/Java-17-E76F00?logo=openjdk&logoColor=white)
+![Spring Boot 3.2.5](https://img.shields.io/badge/Spring%20Boot-3.2.5-6DB33F?logo=springboot&logoColor=white)
+![Caching](https://img.shields.io/badge/Caching-Caffeine%201000%20max%20600s%20expire%20Stats-blue?logo=redis&logoColor=white)
+![Cache Stats](https://img.shields.io/badge/Cache%20Stats-recordStats%20enabled-brightgreen)
+![Security](https://img.shields.io/badge/Security-Headers%20nosniff%20DENY%20XSS-red?logo=springsecurity&logoColor=white)
+![Builder Pattern](https://img.shields.io/badge/Builder%20Pattern-Recommendation.Builder%20Fluent%20API-success?logo=java&logoColor=white)
+![Strategy Pattern](https://img.shields.io/badge/Strategy%20Pattern-Collaborative%20vs%20Content%20vs%20Hybrid-yellow?logo=elasticsearch&logoColor=white)
+![Repository Pattern](https://img.shields.io/badge/Repository%20Pattern-JpaRepository-6DB33F)
+![H2 Database](https://img.shields.io/badge/H2-Database%20recommenddb-003545?logo=h2&logoColor=white)
+![viewCount](https://img.shields.io/badge/viewCount-Added%20%2B%20idx__user%20%2B%20idx__category-orange)
+![JUnit 5](https://img.shields.io/badge/JUnit-5%206%2F6%20Green-25A162?logo=junit5&logoColor=white)
+![Mockito](https://img.shields.io/badge/Mockito-Mocked%20Repo%20when%2Fverify-00BFFF)
+![Recommendation Pattern](https://img.shields.io/badge/Recommendation-Pattern%20Collaborative%20Content%20Hybrid-blueviolet?logo=elasticsearch&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Multi--Stage-2496ED?logo=docker&logoColor=white)
+![Render](https://img.shields.io/badge/Render-Live%202m23s-brightgreen?logo=render&logoColor=white)
+![Tomcat](https://img.shields.io/badge/Apache%20Tomcat-10.1.20-D4AF00?logo=apachetomcat&logoColor=white)
+![Port](https://img.shields.io/badge/Port-8100-00BFFF)
+![Status](https://img.shields.io/badge/Status-Recommendation%20Engine%20Live%20Tier%2010-brightgreen)
+![Tier 10](https://img.shields.io/badge/Tier%2010-System%20Design%20Level%20SCALE-blueviolet)
 
 **Live URL:** https://nine8-recommendation-engine.onrender.com/
 
-[[Live](https://img.shields.io/badge/Live-Render-brightgreen?style=for-the-badge&logo=render)](https://nine8-recommendation-engine.onrender.com)
+[![Live](https://img.shields.io/badge/Live-Render-brightgreen?style=for-the-badge&logo=render)](https://nine8-recommendation-engine.onrender.com)
 
 Project 98 - Part of Java 102 Projects Challenge - System Design Level Tier 10 SCALE
 ---
@@ -175,62 +175,62 @@ This is Project 98 of Tier 10 - SCALE - After Search with Elastic (97), now real
 # 📸 Screenshots - 12 Demos - Recommendation Engine Verified - Live on Render 2m23s
 
 ### Demo 1 – Browser - GET / - Home Live JSON - Recommendation Engine Tier 10 SCALE
-[Demo1 Home](screenshots/demo1.png)
+![Demo1 Home](screenshots/demo1.png)
 
 *GET http://localhost:8100/ - Browser - 200 OK - Returns {"owner":"Raviteja","security":"X-Content-Type-Options nosniff, X-Frame-Options DENY, XSS Protection","designPatterns":["Builder Pattern - Recommendation.Builder","Strategy Pattern - Collaborative vs Content vs Hybrid","Repository Pattern","Caching Pattern"],"tier":"10 - System Design Level - Caching + Security + Testing + Design Patterns","port":"8100","testing":"JUnit 5 + Mockito - 6 tests","project":"98-recommendation-engine","caching":"Caffeine Cache - recommendations cache - 1000 max, 600s expire - Stats enabled - Redis ready","recommendation":"Recommendation Pattern - Collaborative Content Hybrid","live":"https://nine8-recommendation-engine.onrender.com","status":"Live - Recommendation Engine - Tier 10 Scale"} - Proof of Home Live - Portfolio ready - Tier 10 SCALE 98/102 - 96%*
 
 ### Demo 2 – Browser - GET /health - UP - Caching + Security + Recommendation Active
-[Demo2 Health](screenshots/demo2.png)
+![Demo2 Health](screenshots/demo2.png)
 
 *GET http://localhost:8100/health - Browser - 200 OK - Returns {"recommendation":"Active - Recommendation Pattern - Collaborative Content Hybrid - Strategy Pattern","cache":"Active - Caffeine - recommendations, recommendation - Stats enabled","security":"Headers Active","project":"98-recommendation-engine","githubGoal":"CONTRIBUTING.md + Issues + Release Tags + Badges + Live Link + Architecture Diagram - Tier 10 Goal","status":"UP"} - Proof of Health Endpoint - Tier 10 Health Check*
 
 ### Demo 3 – Browser - GET /api/recommendations - Empty List - Before Recommend
-[Demo3 Empty List](screenshots/demo3.png)
+![Demo3 Empty List](screenshots/demo3.png)
 
 *GET http://localhost:8100/api/recommendations - Browser - 200 OK - Returns [] - Empty JSON array - Proof of List Endpoint Working - No recommendations yet - H2 in-memory empty - Caching recommendations cache ready*
 
 ### Demo 4 – Postman - POST /api/recommend - 200 OK - id 1 - Builder Pattern + Cache Evicted - Collaborative
-[Demo4 Recommend Builder Collaborative](screenshots/demo4.png)
+![Demo4 Recommend Builder Collaborative](screenshots/demo4.png)
 
 *POST http://localhost:8100/api/recommend?userId=user1&itemId=item1&itemName=Laptop&category=Electronics&score=4.8&reason=collaborative filtering - similar users liked - 200 OK Time 257 ms Size 621 B - Returns recommendedAt cache recommendations cache evicted recommendUrl id viewCount itemName message Recommended - Cache Evicted - Builder Pattern - Recommendation Pattern*
 
 ### Demo 5 – Postman - POST /api/recommend - 200 OK - id 2 - Content-based
-[Demo5 Recommend Content](screenshots/demo5.png)
+![Demo5 Recommend Content](screenshots/demo5.png)
 
 *POST http://localhost:8100/api/recommend?userId=user1&itemId=item2&itemName=Phone&category=Electronics&score=4.5&reason=content-based - category match - 200 OK Time 59 ms Size 603 B - Returns recommendedAt cache recommendations cache evicted id 2 viewCount 0 itemName Phone category Electronics score 4.5 reason content-based - Second doc*
 
 ### Demo 6 – Postman - GET /api/recommendations - With 2 Docs - viewCount + X-Cache
-[Demo6 List viewCount](screenshots/demo6.png)
+![Demo6 List viewCount](screenshots/demo6.png)
 
 *GET http://localhost:8100/api/recommendations - Postman - 200 OK Time 42 ms Size 746 B - Returns 2 docs id 2 Phone 4.5 content-based + id 1 Laptop 4.8 collaborative filtering - viewCount 0 + recommendedAt - Proof of List Persistence - H2 - idx_user + idx_category + X-Cache: Caffeine*
 
 ### Demo 7 – Postman - GET /api/recommendations/user1?strategy=collaborative - Collaborative-Strategy count 1
-[Demo7 Collaborative](screenshots/demo7.png)
+![Demo7 Collaborative](screenshots/demo7.png)
 
 *GET http://localhost:8100/api/recommendations/user1?strategy=collaborative - Status 200 OK Time 20 ms Size 702 B - engine Recommendation-Pattern - collaborative filtering + content-based + hybrid + count 1 + strategy Collaborative-Strategy + userId user1 + results id 1 Laptop 4.8 collaborative filtering - X-Recommendation-Strategy: Collaborative-Strategy - Core Tier 10 Feature - Netflix*
 
 ### Demo 8 – Postman - GET /api/recommendations/user1?strategy=content - Content-Strategy count 1
-[Demo8 Content](screenshots/demo8.png)
+![Demo8 Content](screenshots/demo8.png)
 
 *GET http://localhost:8100/api/recommendations/user1?strategy=content - Status 200 OK Time 25 ms Size 672 B - engine Recommendation-Pattern - collaborative filtering + content-based + hybrid + count 1 + strategy Content-Strategy + userId user1 + results id 2 Phone 4.5 content-based - category match - X-Recommendation-Strategy: Content-Strategy*
 
 ### Demo 9 – Postman - GET /api/recommendations/user1?strategy=hybrid - Hybrid-Strategy count 2 - Core Feature
-[Demo9 Hybrid](screenshots/demo9.png)
+![Demo9 Hybrid](screenshots/demo9.png)
 
 *GET http://localhost:8100/api/recommendations/user1?strategy=hybrid - Status 200 OK Time 11 ms Size 888 B - Returns engine Recommendation-Pattern - collaborative filtering + content-based + hybrid + count 2 + strategy Hybrid-Strategy + userId user1 + results id 1 Laptop 4.8 collaborative filtering + id 2 Phone 4.5 content-based - sorted by score 4.8 then 4.5 - Core Tier 10 Feature - Netflix Amazon YouTube recommendation - Hybrid = Collaborative + Content sorted by score - Most important demo - Same as 97 fuzzy fixed count 1*
 
 ### Demo 10 – Postman - GET /api/recommendations/search?category=Electronics - count 2
-[Demo10 Search Category](screenshots/demo10.png)
+![Demo10 Search Category](screenshots/demo10.png)
 
 *GET http://localhost:8100/api/recommendations/search?category=Electronics - Status 200 OK Time 23 ms Size 719 B - Returns count 2 + category Electronics + results id 1 Laptop 4.8 + id 2 Phone 4.5 - Search by category - Same as 97 search Exact count 2*
 
 ### Demo 11 – Eclipse Console - JUnit Console Logs
-[Demo11 JUnit Console](screenshots/demo11.png)
+![Demo11 JUnit Console](screenshots/demo11.png)
 
 *Eclipse Console - Builder Pattern Test Passed: Laptop + Format Recommendation Test Passed: Recommendation for user1: Laptop (4.80) - content-based + Mockito Test Passed: getRecommendationById - Mock Rec: Laptop + Mockito Test Passed: getAllRecommendations - Mocked 2 recs - Caching: recommendations + Recommendation Entity Test Passed + Search Test Passed: Found 1 rec for category Electronics - Strategy Pattern Collaborative*
 
 ### Demo 12 – Eclipse JUnit - Green Bar - 6/6 Tests Passed
-[Demo12 JUnit Green](screenshots/demo12.png)
+![Demo12 JUnit Green](screenshots/demo12.png)
 
 *Eclipse JUnit - Finished after 6.594 seconds - Runs: 6/6 Errors: 0 Failures: 0 Green Bar - RecommendationServiceTest [Runner: JUnit 5] (5.479 s) - testBuilderPattern 5.479 s + 6 tests - Was 2/2 Tier 5 -> Now 6/6 Tier 10*
 
