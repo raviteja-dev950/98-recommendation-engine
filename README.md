@@ -20,7 +20,7 @@
 ![Status](https://img.shields.io/badge/Status-Recommendation%20Engine%20Live%20Tier%2010-brightgreen)
 ![Tier 10](https://img.shields.io/badge/Tier%2010-System%20Design%20Level%20SCALE-blueviolet)
 
-**Live URL:** https://nine9-multi-tenant-saas.onrender.com/
+**Live URL:** https://nine8-recommendation-engine.onrender.com/
 
 [![Live](https://img.shields.io/badge/Live-Render-brightgreen?style=for-the-badge&logo=render)](https://nine8-recommendation-engine.onrender.com)
 
@@ -108,151 +108,145 @@ This is Project 98 of Tier 10 - SCALE - After Search with Elastic (97), now real
 
 ---
 
-# 📂 Project Structure - Multi-tenant SaaS Repo
+# 📂 Project Structure - Recommendation Engine Repo
 
 ```text
-99-multi-tenant-saas
+98-recommendation-engine
 │
 ├── .github
 │   └── ISSUE_TEMPLATE
-│       ├── bug_report.md (Labels bug, Tier 10, System Design, isolated \n trim fix)
-│       └── feature_request.md (Labels enhancement, Tier 10, Multi-tenant Isolation)
+│       ├── bug_report.md (Labels bug, Tier 10, System Design)
+│       └── feature_request.md (Labels enhancement, Tier 10)
 │
 ├── src
 │   ├── main
 │   │   ├── java
 │   │   │   └── com
-│   │   │       └── multitenant
-│   │   │           ├── MultiTenantSaasApplication.java (Main + Tomcat 8101 local 10000 Render + Started 10.459s local 85.599s Render)
+│   │   │       └── recommendation
+│   │   │           ├── RecommendationEngineApplication.java (Main + Tomcat 8100 local 10000 Render + Started 13.796s local 89.599s Render)
 │   │   │           ├── config
 │   │   │           │   ├── CacheConfig.java (@Configuration @EnableCaching + CaffeineCacheManager maximumSize=1000 expireAfterAccess=600s recordStats() + Redis pattern ready + recordStats enabled)
 │   │   │           │   └── SecurityHeadersConfig.java (@Configuration implements WebMvcConfigurer + HandlerInterceptor + nosniff DENY XSS Protection - Tier 10 Security)
 │   │   │           ├── controller
-│   │   │           │   ├── HomeController.java (2 endpoints + Home Live JSON Tier 10 + Health UP cache Active multi-tenant Active + tenantdb + Live URL nine9)
-│   │   │           │   └── TenantDataController.java (12 endpoints + Create POST Builder + trim() fix + List GET @Cacheable X-Cache + Tenant GET Tenant-Strategy + Shared GET Shared-Strategy + Isolated GET Isolated-Strategy FIXED from [] empty + Hybrid GET Hybrid-Strategy sorted 4.8 4.5 4.2 + Search Category GET count 3 + Category GET + Count GET + Info GET + X-Strategy Tenant vs Shared vs Isolated vs Hybrid - Strategy Pattern core - SaaS Isolation)
+│   │   │           │   └── RecommendationController.java (7 endpoints + Home Live JSON Tier 10 + Health UP cache Active recommendation Active + Recommend POST + List GET @Cacheable X-Cache + Collaborative GET Collaborative-Strategy + Content GET Content-Strategy + Hybrid GET Hybrid-Strategy sorted 4.8 4.5 + Search Category GET count 2 + X-Recommendation-Strategy Collaborative vs Content vs Hybrid - Strategy Pattern core - Netflix Amazon YouTube)
 │   │   │           ├── model
-│   │   │           │   └── TenantData.java (Entity @Table name=tenant_data + id Long + tenantId + dataId + dataName + category + dataValue + isolationLevel + viewCount + createdAt + value alias + data_value column fix for reserved keyword value + Inner Builder class tenantId() dataId() dataName() category() dataValue() isolationLevel() viewCount() createdAt() build() Fluent API - Builder Pattern + trim() fix)
+│   │   │           │   └── Recommendation.java (Entity @Table name=recommendation + id Long + userId + itemId + itemName + category + score + reason + recommendedAt + viewCount + Inner Builder class userId() itemId() itemName() category() score() reason() recommendedAt() build() Fluent API - Builder Pattern)
 │   │   │           ├── repository
-│   │   │           │   └── TenantDataRepository.java (JpaRepository<TenantData, Long> + findAllByOrderByCreatedAtDesc + findByTenantIdOrderByCreatedAtDesc + findByCategoryContainingIgnoreCase + findByIsolationLevel + findByTenantId + findByCategory + idx_tenant + idx_category - Repository Pattern - Multi-tenant pattern ready)
+│   │   │           │   └── RecommendationRepository.java (JpaRepository<Recommendation, Long> + findAllByOrderByRecommendedAtDesc + findByUserIdOrderByScoreDesc + findByCategoryContainingIgnoreCase + findByUserIdAndCategory + idx_user + idx_category - Repository Pattern - Recommendation pattern ready)
 │   │   │           └── service
-│   │   │               └── TenantDataService.java (Builder Pattern createTenantData + trim() fix cleanIsolation isolationLevel.trim() + CacheEvict tenantDatas tenantData + viewCount + idx_tenant + idx_category + Cacheable tenantDatas + Cacheable tenantData + formatTenantDataInfo + isRelevant category contains + Strategy Pattern getTenantDataByStrategy tenant vs shared vs isolated vs hybrid + trim() fix cleanType + filter isolated trim() FIXED [] bug)
+│   │   │               └── RecommendationService.java (Builder Pattern recommend + CacheEvict recommendations cache evicted + viewCount + idx_user + idx_category + Cacheable recommendations + Cacheable recommendation + formatRecommendationInfo + isRelevant category contains)
 │   │   │
 │   │   └── resources
-│   │       └── application.properties (server.port=${PORT:8101} + datasource jdbc:h2:mem:tenantdb FIXED from dbc typo + jpa ddl-auto create-drop show-sql true + h2 console enabled + cache type caffeine + caffeine spec maximumSize=1000,expireAfterAccess=600s,recordStats)
+│   │       └── application.properties (server.port=${PORT:8100} + datasource jdbc:h2:mem:recommenddb FIXED from dbc typo + jpa ddl-auto update show-sql true + h2 console enabled + cache type caffeine + caffeine spec maximumSize=1000,expireAfterAccess=600s,recordStats)
 │   │
 │   └── test
 │       └── java
 │           └── com
-│               └── multitenant
-│                   └── TenantDataServiceTest.java (JUnit 5 + Mockito - 6 tests green - Runs 6/6 Errors 0 Failures 0 Green Bar 5.798s)
+│               └── recommendation
+│                   └── RecommendationServiceTest.java (JUnit 5 + Mockito - 6 tests green - Runs 6/6 Errors 0 Failures 0 Green Bar 5.479s)
 │
 ├── screenshots
-│   ├── demo1.png (GET / - Home Live JSON - Multi-tenant SaaS Tier 10 - owner Raviteja + security nosniff DENY XSS + designPatterns Builder Strategy Repository Caching + tier 10 + port 8101 + testing JUnit5 Mockito 6 tests + caching Caffeine 1000 max 600s Stats enabled + multi-tenant Tenant Shared Isolated Hybrid + live https://nine9-multi-tenant-saas.onrender.com)
-│   ├── demo2.png (GET /health - UP - multi-tenant Active Multi-tenant Pattern Tenant Shared Isolated Hybrid Strategy Pattern + cache Active Caffeine Stats enabled + security Headers Active + githubGoal CONTRIBUTING.md + database H2 tenantdb)
-│   ├── demo3.png (GET /api/tenant-data - [] - Empty list before create - Browser localhost:8101/api/tenant-data Pretty-print)
-│   ├── demo4.png (POST /api/tenant-data?tenantId=tenant1&dataId=data1&dataName=Laptop Data&category=Electronics&dataValue=4.8&isolationLevel=isolated - 200 OK Time 300 ms Size 587 B - Returns createdAt cache tenantDatas cache evicted id viewCount dataName message Created - Builder Pattern CLEAN without \n)
-│   ├── demo5.png (POST /api/tenant-data?tenantId=tenant1&dataId=data2&dataName=Phone Data&category=Electronics&dataValue=4.5&isolationLevel=shared - 200 OK Time 16 ms Size 584 B - Returns createdAt cache tenantDatas cache evicted id 2 viewCount 0 dataName Phone category Electronics dataValue 4.5 isolationLevel shared CLEAN)
-│   ├── demo6.png (POST /api/tenant-data?tenantId=tenant2&dataId=data3&dataName=Book Data&category=Books&dataValue=4.9&isolationLevel=isolated - 200 OK Time 19 ms Size 580 B - Returns createdAt cache tenantDatas cache evicted id 3 tenantId tenant2 dataName Book Books isolated CLEAN tenant2 isolation)
-│   ├── demo7.png (POST /api/tenant-data?tenantId=tenant1&dataId=data4&dataName=Tablet Data&category=Electronics&dataValue=4.2&isolationLevel=hybrid - 200 OK Time 22 ms Size 586 B - Returns createdAt cache tenantDatas cache evicted id 4 viewCount 0 dataName Tablet category Electronics dataValue 4.2 isolationLevel hybrid CLEAN)
-│   ├── demo8.png (GET /api/tenant-data - [{"id":4,"tenantId":"tenant1","dataId":"data4","dataName":"Tablet Data","category":"Electronics","dataValue":4.2,"isolationLevel":"hybrid","viewCount":0,"createdAt":"2026-11-04T00:39:56.34375","value":4.2},{"id":3,"tenantId":"tenant2","dataId":"data3","dataName":"Book Data","category":"Books","dataValue":4.9,"isolationLevel":"isolated","viewCount":0},{"id":2,"tenantId":"tenant1","dataId":"data2","dataName":"Phone Data","category":"Electronics","dataValue":4.5,"isolationLevel":"shared","viewCount":0},{"id":1,"tenantId":"tenant1","dataId":"data1","dataName":"Laptop Data","category":"Electronics","dataValue":4.8,"isolationLevel":"isolated","viewCount":0}] - List with viewCount + CLEAN without \n + data_value fix - Postman 200 OK 4 items ordered desc)
-│   ├── demo9.png (GET /api/tenant-data/strategy/tenant1?type=tenant - Tenant-Strategy - Status 200 OK - Returns 3 items id 1 Laptop Data isolated 4.8 + id 2 Phone Data shared 4.5 + id 4 Tablet Data hybrid 4.2 - CLEAN timestamps 00:38:22 00:39:06 00:39:56)
-│   ├── demo10.png (GET /api/tenant-data/strategy/tenant1?type=shared - Shared-Strategy - Status 200 OK - Returns 1 item id 2 Phone Data Electronics 4.5 shared - CLEAN)
-│   ├── demo11.png (GET /api/tenant-data/strategy/tenant1?type=isolated - Isolated-Strategy - Status 200 OK - Returns 1 item id 1 Laptop Data Electronics 4.8 isolated - FIXED FROM [] EMPTY - CRITICAL PROOF trim() fix - CLEAN timestamp 00:38:22)
-│   ├── demo12.png (GET /api/tenant-data/strategy/tenant1?type=hybrid - Hybrid-Strategy - Status 200 OK - Returns 3 items id 1 Laptop 4.8 isolated + id 2 Phone 4.5 shared + id 4 Tablet 4.2 hybrid - Sorted by dataValue DESC 4.8 4.5 4.2 - Core Tier 10 Feature - SaaS Isolation)
-│   ├── demo13.png (Eclipse Console - JUnit Console Logs - Builder Pattern Test Passed: Laptop Data + Format TenantData Test Passed: Tenant tenant1: Laptop Data (4.80) - isolated + Search Test Passed + Mockito Test Passed: getAllTenantData + TenantData Entity Test Passed + Mockito Test Passed: getTenantDataById)
-│   ├── demo14.png (Eclipse JUnit - Finished after 5.798 seconds - Runs: 6/6 Errors: 0 Failures: 0 Green Bar - TenantDataServiceTest [Runner: JUnit 5] (5.055 s) - testBuilderPattern 4.624 s + testFormatTenantDataInfo 0.102 s + testSearchByCategory_Mockito 0.143 s + testGetAllTenantData_Mockito 0.019 s + testTenantDataEntity 0.015 s + testGetTenantDataById_Mockito 0.131 s - Was 2/2 Tier 5 -> Now 6/6 Tier 10 - FIXED [] bug)
-│   └── demo15.png (Render Deploy Live - STATUS Deploy succeeded | Live Green Tick - DURATION 2m 50s - DEPLOYED Nov 4 2026 at 1:17:22 AM GMT+5:30 - TRIGGER First Deploy - SOURCE O377dbf - Tomcat started on port 10000 - Started MultiTenantSaasApplication in 95.797 seconds - Your service is live - Available at primary URL https://nine9-multi-tenant-saas.onrender.com - Proof of Production Live - Same as 97 Live 2m35s + 98 Live 2m23s)
+│   ├── demo1.png (GET / - Home Live JSON - Recommendation Engine Tier 10 - owner Raviteja + security nosniff DENY XSS + designPatterns Builder Strategy Repository Caching + tier 10 + port 8100 + testing JUnit5 Mockito 6 tests + caching Caffeine 1000 max 600s Stats enabled + recommendation Collaborative Content Hybrid + live https://nine8-recommendation-engine.onrender.com)
+│   ├── demo2.png (GET /health - UP - recommendation Active Recommendation Pattern Collaborative Content Hybrid Strategy Pattern + cache Active Caffeine Stats enabled + security Headers Active + githubGoal CONTRIBUTING.md)
+│   ├── demo3.png (GET /api/recommendations - [] - Empty list before recommend - Browser localhost:8100/api/recommendations Pretty-print)
+│   ├── demo4.png (POST /api/recommend?userId=user1&itemId=item1&itemName=Laptop&category=Electronics&score=4.8&reason=collaborative filtering - similar users liked - 200 OK Time 257 ms Size 621 B - Returns recommendedAt cache recommendations cache evicted recommendUrl id viewCount itemName message Recommended - Cache Evicted - Builder Pattern - Recommendation Pattern)
+│   ├── demo5.png (POST /api/recommend?userId=user1&itemId=item2&itemName=Phone&category=Electronics&score=4.5&reason=content-based - category match - 200 OK Time 59 ms Size 603 B - Returns recommendedAt cache recommendations cache evicted id 2 viewCount 0 itemName Phone category Electronics score 4.5 reason content-based)
+│   ├── demo6.png (GET /api/recommendations - [{"id":2,"userId":"user1","itemId":"item2","itemName":"Phone","category":"Electronics","score":4.5,"reason":"content-based - category match","recommendedAt":"2026-11-03T15:52:45.863101","viewCount":0},{"id":1,"userId":"user1","itemId":"item1","itemName":"Laptop","category":"Electronics","score":4.8,"reason":"collaborative filtering - similar users liked","recommendedAt":"2026-11-03T15:51:06.947508","viewCount":0}] - List with viewCount + X-Cache - Postman 200 OK 42 ms 746 B)
+│   ├── demo7.png (GET /api/recommendations/user1?strategy=collaborative - Collaborative-Strategy - Status 200 OK Time 20 ms Size 702 B - Returns engine Recommendation-Pattern - collaborative filtering + content-based + hybrid + count 1 + strategy Collaborative-Strategy + userId user1 + results id 1 Laptop 4.8 collaborative filtering)
+│   ├── demo8.png (GET /api/recommendations/user1?strategy=content - Content-Strategy - Status 200 OK Time 25 ms Size 672 B - Returns engine Recommendation-Pattern + count 1 + strategy Content-Strategy + userId user1 + results id 2 Phone 4.5 content-based - category match)
+│   ├── demo9.png (GET /api/recommendations/user1?strategy=hybrid - Hybrid-Strategy - Status 200 OK Time 11 ms Size 888 B - Returns engine Recommendation-Pattern + count 2 + strategy Hybrid-Strategy + userId user1 + results id 1 Laptop 4.8 collaborative filtering + id 2 Phone 4.5 content-based - sorted by score 4.8 then 4.5 - Core Tier 10 Feature - Netflix Amazon)
+│   ├── demo10.png (GET /api/recommendations/search?category=Electronics - Search - Status 200 OK Time 23 ms Size 719 B - Returns count 2 + category Electronics + results id 1 Laptop 4.8 + id 2 Phone 4.5)
+│   ├── demo11.png (Eclipse Console - JUnit Console Logs - Builder Pattern Test Passed: Laptop + Format Recommendation Test Passed: Recommendation for user1: Laptop (4.80) - content-based + Mockito Test Passed: getRecommendationById - Mock Rec: Laptop + Mockito Test Passed: getAllRecommendations - Mocked 2 recs - Caching: recommendations + Recommendation Entity Test Passed + Search Test Passed: Found 1 rec for category Electronics - Strategy Pattern Collaborative)
+│   ├── demo12.png (Eclipse JUnit - Finished after 6.594 seconds - Runs: 6/6 Errors: 0 Failures: 0 Green Bar - RecommendationServiceTest [Runner: JUnit 5] (5.479 s) - testBuilderPattern 5.479 s + testFormatRecommendationInfo 0.066 s + testRecommendationEntity 0.022 s + testGetRecommendationById_Mockito 0.196 s + testSearchByCategory_Mockito 0.023 s + testGetAllRecommendations_Mockito 0.014 s - Was 2/2 Tier 5 -> Now 6/6 Tier 10)
+│   ├── demo13.png (Render Deploy Live - STATUS Deploy succeeded Live Green Tick - DURATION 2m23s - DEPLOYED - TRIGGER First Deploy - SOURCE - Tomcat started on port 10000 - Started RecommendationEngineApplication in 89.599 seconds - Your service is live - Available at primary URL https://nine8-recommendation-engine.onrender.com - Proof of Live - Same as 97 Live 2m35s)
+│   └── demo14.png (Live URL Test - https://nine8-recommendation-engine.onrender.com/ + /health - Live JSON - UP - Proof of Production)
 │
 ├── .gitignore (target/ .mvn/ settings/ .classpath .project .factorypath META-INF/ data/ uploads/ *.log)
 ├── CONTRIBUTING.md (Tier 10 GitHub Goal - 12466 chars)
 ├── Dockerfile (Multi-Stage maven:3.9-eclipse-temurin-17 AS build + eclipse-temurin:17-jdk-alpine + mkdir -p data + COPY --from=build /app/target/*.jar app.jar)
 ├── mvnw
 ├── mvnw.cmd
-├── pom.xml (No Lombok - H2 + JPA + Validation + Cache + Caffeine + spring-boot-starter-cache + spring-boot-starter-test + JUnit5 + Mockito + Multi-tenant Pattern)
+├── pom.xml (No Lombok - H2 + JPA + Validation + Cache + Caffeine + spring-boot-starter-cache + spring-boot-starter-test + JUnit5 + Mockito + Recommendation Pattern)
 └── README.md
 ```
 
 ---
 
-# 📸 Screenshots - 15 Demos - Multi-tenant SaaS Verified - Live on Render 2m 50s
+# 📸 Screenshots - 14 Demos - Recommendation Engine Verified - Live on Render 2m23s
 
-### Demo 1 – Browser - GET / - Home Live JSON - Multi-tenant SaaS Tier 10 SCALE
-![Demo1 Home](screenshots/demo1.png)
+### Demo 1 – Browser - GET / - Home Live JSON - Recommendation Engine Tier 10 SCALE
+![Demo1 Home](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo1.png)
 
-*GET http://localhost:8101/ - Browser - 200 OK - Returns {"status":"UP","service":"Multi-Tenant SaaS Platform","features":["Multi-Tenant Data Isolation","Tenant-Based Data Access","Category Search","Isolation Levels: Shared, Isolated, Hybrid","Strategy Pattern","Builder Pattern","Caffeine Cache","Security Headers"],"endpoints":{...},"live_url":"https://nine9-multi-tenant-saas.onrender.com","author":"Ravi Teja"} - Proof of Home Live - Portfolio ready - Tier 10 SCALE 99/102 - 97%*
+*GET http://localhost:8100/ - Browser - 200 OK - Returns {"owner":"Raviteja","security":"X-Content-Type-Options nosniff, X-Frame-Options DENY, XSS Protection","designPatterns":["Builder Pattern - Recommendation.Builder","Strategy Pattern - Collaborative vs Content vs Hybrid","Repository Pattern","Caching Pattern"],"tier":"10 - System Design Level - Caching + Security + Testing + Design Patterns","port":"8100","testing":"JUnit 5 + Mockito - 6 tests","project":"98-recommendation-engine","caching":"Caffeine Cache - recommendations cache - 1000 max, 600s expire - Stats enabled - Redis ready","recommendation":"Recommendation Pattern - Collaborative Content Hybrid","live":"https://nine8-recommendation-engine.onrender.com","status":"Live - Recommendation Engine - Tier 10 Scale"} - Proof of Home Live - Portfolio ready - Tier 10 SCALE 98/102 - 96%*
 
-### Demo 2 – Browser - GET /health - UP - Caching + Security + Multi-tenant Active
-![Demo2 Health](screenshots/demo2.png)
+### Demo 2 – Browser - GET /health - UP - Caching + Security + Recommendation Active
+![Demo2 Health](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo2.png)
 
-*GET http://localhost:8101/health - Browser - 200 OK - Returns {"status":"UP","database":"H2","databaseName":"tenantdb","caching":"Caffeine","cacheManager":"Caffeine","cacheSpec":"maximumSize=1000,expireAfterAccess=600s,recordStats","securityHeaders":"X-Content-Type-Options nosniff, X-Frame-Options DENY, X-XSS-Protection","patterns":["Builder","Strategy","Repository","Caching"],"features":["multi-tenancy","isolation-levels"]} - Proof of Health Endpoint - Tier 10 Health Check*
+*GET http://localhost:8100/health - Browser - 200 OK - Returns {"recommendation":"Active - Recommendation Pattern - Collaborative Content Hybrid - Strategy Pattern","cache":"Active - Caffeine - recommendations, recommendation - Stats enabled","security":"Headers Active","project":"98-recommendation-engine","githubGoal":"CONTRIBUTING.md + Issues + Release Tags + Badges + Live Link + Architecture Diagram - Tier 10 Goal","status":"UP"} - Proof of Health Endpoint - Tier 10 Health Check*
 
-### Demo 3 – Browser - GET /api/tenant-data - Empty List - Before Create
-![Demo3 Empty List](screenshots/demo3.png)
+### Demo 3 – Browser - GET /api/recommendations - Empty List - Before Recommend
+![Demo3 Empty List](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo3.png)
 
-*GET http://localhost:8101/api/tenant-data - Browser - 200 OK - Returns [] - Empty JSON array - Proof of List Endpoint Working - No data yet - H2 in-memory empty - Caching tenantDatas cache ready*
+*GET http://localhost:8100/api/recommendations - Browser - 200 OK - Returns [] - Empty JSON array - Proof of List Endpoint Working - No recommendations yet - H2 in-memory empty - Caching recommendations cache ready*
 
-### Demo 4 – Postman - POST /api/tenant-data - 200 OK - id 1 - Builder Pattern + CLEAN without \n - Isolated
-![Demo4 Create Isolated](screenshots/demo4.png)
+### Demo 4 – Postman - POST /api/recommend - 200 OK - id 1 - Builder Pattern + Cache Evicted - Collaborative
+![Demo4 Recommend Builder Collaborative](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo4.png)
 
-*POST http://localhost:8101/api/tenant-data?tenantId=tenant1&dataId=data1&dataName=Laptop%20Data&category=Electronics&dataValue=4.8&isolationLevel=isolated - 200 OK Time 300 ms Size 587 B - Returns id 1 tenantId tenant1 dataId data1 dataName Laptop Data category Electronics dataValue 4.8 isolationLevel isolated CLEAN without \n createdAt 2026-11-04T00:38:22.613103 value 4.8 viewCount 0 - Builder Pattern - trim() fix*
+*POST http://localhost:8100/api/recommend?userId=user1&itemId=item1&itemName=Laptop&category=Electronics&score=4.8&reason=collaborative filtering - similar users liked - 200 OK Time 257 ms Size 621 B - Returns recommendedAt cache recommendations cache evicted recommendUrl id viewCount itemName message Recommended - Cache Evicted - Builder Pattern - Recommendation Pattern*
 
-### Demo 5 – Postman - POST /api/tenant-data - 200 OK - id 2 - Shared CLEAN
-![Demo5 Create Shared](screenshots/demo5.png)
+### Demo 5 – Postman - POST /api/recommend - 200 OK - id 2 - Content-based
+![Demo5 Recommend Content](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo5.png)
 
-*POST http://localhost:8101/api/tenant-data?tenantId=tenant1&dataId=data2&dataName=Phone%20Data&category=Electronics&dataValue=4.5&isolationLevel=shared - 200 OK Time 16 ms Size 584 B - Returns id 2 tenantId tenant1 dataId data2 dataName Phone Data category Electronics dataValue 4.5 isolationLevel shared CLEAN without \n createdAt 2026-11-04T00:39:06.6646785 value 4.5 viewCount 0*
+*POST http://localhost:8100/api/recommend?userId=user1&itemId=item2&itemName=Phone&category=Electronics&score=4.5&reason=content-based - category match - 200 OK Time 59 ms Size 603 B - Returns recommendedAt cache recommendations cache evicted id 2 viewCount 0 itemName Phone category Electronics score 4.5 reason content-based - Second doc*
 
-### Demo 6 – Postman - POST /api/tenant-data - 200 OK - id 3 - Tenant2 Isolation
-![Demo6 Create Tenant2](screenshots/demo6.png)
+### Demo 6 – Postman - GET /api/recommendations - With 2 Docs - viewCount + X-Cache
+![Demo6 List viewCount](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo6.png)
 
-*POST http://localhost:8101/api/tenant-data?tenantId=tenant2&dataId=data3&dataName=Book%20Data&category=Books&dataValue=4.9&isolationLevel=isolated - 200 OK Time 19 ms Size 580 B - Returns id 3 tenantId tenant2 dataId data3 dataName Book Data category Books dataValue 4.9 isolationLevel isolated CLEAN - Tenant2 isolation proof - Multi-tenancy*
+*GET http://localhost:8100/api/recommendations - Postman - 200 OK Time 42 ms Size 746 B - Returns 2 docs id 2 Phone 4.5 content-based + id 1 Laptop 4.8 collaborative filtering - viewCount 0 + recommendedAt - Proof of List Persistence - H2 - idx_user + idx_category + X-Cache: Caffeine*
 
-### Demo 7 – Postman - POST /api/tenant-data - 200 OK - id 4 - Hybrid CLEAN
-![Demo7 Create Hybrid](screenshots/demo7.png)
+### Demo 7 – Postman - GET /api/recommendations/user1?strategy=collaborative - Collaborative-Strategy count 1
+![Demo7 Collaborative](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo7.png)
 
-*POST http://localhost:8101/api/tenant-data?tenantId=tenant1&dataId=data4&dataName=Tablet%20Data&category=Electronics&dataValue=4.2&isolationLevel=hybrid - 200 OK Time 22 ms Size 586 B - Returns id 4 tenantId tenant1 dataId data4 dataName Tablet Data category Electronics dataValue 4.2 isolationLevel hybrid CLEAN - Hybrid isolation*
+*GET http://localhost:8100/api/recommendations/user1?strategy=collaborative - Status 200 OK Time 20 ms Size 702 B - Returns engine Recommendation-Pattern - collaborative filtering + content-based + hybrid + count 1 + strategy Collaborative-Strategy + userId user1 + results id 1 Laptop 4.8 collaborative filtering - X-Recommendation-Strategy: Collaborative-Strategy - Core Tier 10 Feature - Netflix*
 
-### Demo 8 – Postman - GET /api/tenant-data - With 4 Docs - viewCount + CLEAN without \n
-![Demo8 List 4 Items](screenshots/demo8.png)
+### Demo 8 – Postman - GET /api/recommendations/user1?strategy=content - Content-Strategy count 1
+![Demo8 Content](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo8.png)
 
-*GET http://localhost:8101/api/tenant-data - Browser - 200 OK - Returns 4 docs id 4 Tablet hybrid 4.2 + id 3 Book tenant2 isolated 4.9 + id 2 Phone shared 4.5 + id 1 Laptop isolated 4.8 - Ordered by createdAtDesc - viewCount 0 + createdAt 00:38 00:39 - Proof of List Persistence - H2 - idx_tenant + idx_category + X-Cache: Caffeine - CLEAN without \n - data_value fix*
+*GET http://localhost:8100/api/recommendations/user1?strategy=content - Status 200 OK Time 25 ms Size 672 B - Returns engine Recommendation-Pattern - collaborative filtering + content-based + hybrid + count 1 + strategy Content-Strategy + userId user1 + results id 2 Phone 4.5 content-based - category match - X-Recommendation-Strategy: Content-Strategy*
 
-### Demo 9 – Postman - GET /api/tenant-data/strategy/tenant1?type=tenant - Tenant count 3
-![Demo9 Tenant Strategy](screenshots/demo9.png)
+### Demo 9 – Postman - GET /api/recommendations/user1?strategy=hybrid - Hybrid-Strategy count 2 - Core Feature
+![Demo9 Hybrid](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo9.png)
 
-*GET http://localhost:8101/api/tenant-data/strategy/tenant1?type=tenant - Browser - 200 OK - Returns 3 items id 1 Laptop isolated 4.8 + id 2 Phone shared 4.5 + id 4 Tablet hybrid 4.2 - Tenant isolation - tenant1 data only - CLEAN timestamps 00:38:22 00:39:06 00:39:56*
+*GET http://localhost:8100/api/recommendations/user1?strategy=hybrid - Status 200 OK Time 11 ms Size 888 B - Returns engine Recommendation-Pattern - collaborative filtering + content-based + hybrid + count 2 + strategy Hybrid-Strategy + userId user1 + results id 1 Laptop 4.8 collaborative filtering + id 2 Phone 4.5 content-based - sorted by score 4.8 then 4.5 - Core Tier 10 Feature - Netflix Amazon YouTube recommendation - Hybrid = Collaborative + Content sorted by score - Most important demo - Same as 97 fuzzy fixed count 1*
 
-### Demo 10 – Postman - GET /api/tenant-data/strategy/tenant1?type=shared - Shared count 1
-![Demo10 Shared Strategy](screenshots/demo10.png)
+### Demo 10 – Postman - GET /api/recommendations/search?category=Electronics - count 2
+![Demo10 Search Category](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo10.png)
 
-*GET http://localhost:8101/api/tenant-data/strategy/tenant1?type=shared - Browser - 200 OK - Returns 1 item id 2 Phone Data Electronics 4.5 shared - Shared-Strategy - Only shared isolation - CLEAN*
+*GET http://localhost:8100/api/recommendations/search?category=Electronics - Status 200 OK Time 23 ms Size 719 B - Returns count 2 + category Electronics + results id 1 Laptop 4.8 + id 2 Phone 4.5 - Search by category - Same as 97 search Exact count 2*
 
-### Demo 11 – Postman - GET /api/tenant-data/strategy/tenant1?type=isolated - Isolated count 1 FIXED from [] - CRITICAL
-![Demo11 Isolated FIXED](screenshots/demo11.png)
+### Demo 11 – Eclipse Console - JUnit Console Logs
+![Demo11 JUnit Console](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo11.png)
 
-*GET http://localhost:8101/api/tenant-data/strategy/tenant1?type=isolated - Browser - 200 OK - Returns 1 item id 1 Laptop Data Electronics 4.8 isolated value 4.8 - FIXED FROM [] EMPTY - CRITICAL PROOF trim() fix - Was [] empty due to isolationLevel="isolated\n" bug - Now CLEAN without \n returns 1 item - Core Tier 10 Fix - Same as 98 hybrid sorted 4.8 4.5 but for isolation - Most important demo - Proof of Bug Fix*
+*Eclipse Console - Builder Pattern Test Passed: Laptop + Format Recommendation Test Passed: Recommendation for user1: Laptop (4.80) - content-based + Mockito Test Passed: getRecommendationById - Mock Rec: Laptop + Mockito Test Passed: getAllRecommendations - Mocked 2 recs - Caching: recommendations + Recommendation Entity Test Passed + Search Test Passed: Found 1 rec for category Electronics - Strategy Pattern Collaborative*
 
-### Demo 12 – Postman - GET /api/tenant-data/strategy/tenant1?type=hybrid - Hybrid count 3 sorted 4.8 4.5 4.2 - Core Feature
-![Demo12 Hybrid Sorted](screenshots/demo12.png)
+### Demo 12 – Eclipse JUnit - Green Bar - 6/6 Tests Passed
+![Demo12 JUnit Green](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo12.png)
 
-*GET http://localhost:8101/api/tenant-data/strategy/tenant1?type=hybrid - Browser - 200 OK - Returns 3 items id 1 Laptop 4.8 isolated + id 2 Phone 4.5 shared + id 4 Tablet 4.2 hybrid - Sorted by dataValue DESC 4.8 then 4.5 then 4.2 - Hybrid-Strategy - Core Tier 10 Feature - SaaS Isolation sorted - Most important demo - Same as 98 hybrid sorted 4.8 4.5 but for multi-tenant - CLEAN timestamps 00:38:22 00:39:06 00:39:56*
+*Eclipse JUnit - Finished after 6.594 seconds - Runs: 6/6 Errors: 0 Failures: 0 Green Bar - RecommendationServiceTest [Runner: JUnit 5] (5.479 s) - testBuilderPattern 5.479 s + 6 tests - Was 2/2 Tier 5 -> Now 6/6 Tier 10*
 
-### Demo 13 – Eclipse Console - JUnit Console Logs - Builder + trim() fix
-![Demo13 JUnit Console](screenshots/demo13.png)
+### Demo 13 – Render - Deploy succeeded Live - DURATION 2m23s - Your service is live
+![Demo13 Render Live](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo13.png)
 
-*Eclipse Console - JUnit Console Logs - Builder Pattern Test Passed: Laptop Data + Format TenantData Test Passed: Tenant tenant1: Laptop Data (4.80) - isolated + Search Test Passed + Mockito Test Passed: getAllTenantData + TenantData Entity Test Passed + Mockito Test Passed: getTenantDataById - 6 tests console logs*
+*Render Dashboard - 98-recommendation-engine - STATUS Deploy succeeded | Live Green Tick - DURATION 2m23s - DEPLOYED - TRIGGER First Deploy - SOURCE - Tomcat started on port 10000 - Started RecommendationEngineApplication in 89.599 seconds - Your service is live - Available at primary URL https://nine8-recommendation-engine.onrender.com - Proof of Production Live - Same as 97 Live 2m35s - Tier 10 SCALE 98/102 96%*
 
-### Demo 14 – Eclipse JUnit - Green Bar - 6/6 Tests Passed - 5.798s - FIXED [] bug
-![Demo14 JUnit Green](screenshots/demo14.png)
+### Demo 14 – Live URL Test - https://nine8-recommendation-engine.onrender.com/ + /health - Live JSON - UP - Proof of Production
+![Demo14 Live URL](https://github.com/raviteja-dev950/98-recommendation-engine/raw/main/screenshots/demo14.png)
 
-*Eclipse JUnit - Finished after 5.798 seconds - Runs: 6/6 Errors: 0 Failures: 0 Green Bar - TenantDataServiceTest [Runner: JUnit 5] (5.055 s) - testBuilderPattern 4.624 s + testFormatTenantDataInfo 0.102 s + testSearchByCategory_Mockito 0.143 s + testGetAllTenantData_Mockito 0.019 s + testTenantDataEntity 0.015 s + testGetTenantDataById_Mockito 0.131 s - Was 2/2 Tier 5 -> Now 6/6 Tier 10 - FIXED [] bug with trim() - 5.798s - Same as 98 6.594s*
+*Live URL - https://nine8-recommendation-engine.onrender.com/ - Returns Live JSON Tier 10 SCALE + /health UP cache Active recommendation Active - Proof of Production - Portfolio ready - Tier 10 SCALE 98/102 96% - Only 4 left to 100%*
 
-### Demo 15 – Render - Deploy succeeded Live - DURATION 2m 50s - Your service is live - O377dbf - 95.797s
-![Demo15 Render Live 2m50s](screenshots/demo15.png)
 
-*Render Dashboard - 99-multi-tenant-saas - STATUS Deploy succeeded | Live Green Tick - DURATION 2m 50s - DEPLOYED Nov 4 2026 at 1:17:22 AM GMT+5:30 - TRIGGER First Deploy - SOURCE O377dbf - Tomcat started on port 10000 - Started MultiTenantSaasApplication in 95.797 seconds (process running for 105.62) - Your service is live - Available at primary URL https://nine9-multi-tenant-saas.onrender.com - Initializing Spring DispatcherServlet - Completed initialization in 1 ms - Proof of Production Live - Same as 97 Live 2m35s + 98 Live 2m23s - Tier 10 SCALE 99/102 97% - O377dbf latest fix*
 
 ---
-
 
 # ▶ How to Run - Recommendation Engine Repo
 
@@ -439,7 +433,7 @@ If you found this project helpful, consider giving it a ⭐ Star on GitHub.
 
 **Single Repo:** [98-recommendation-engine](https://github.com/raviteja-dev950/98-recommendation-engine)
 
-**Live URL:** https://nine9-multi-tenant-saas.onrender.com/
+**Live URL:** https://nine8-recommendation-engine.onrender.com/
 
 **Deploy:** Deploy succeeded | Live Green Tick - DURATION 2m23s - DEPLOYED - TRIGGER First Deploy - SOURCE - Your service is live - Available at primary URL https://nine8-recommendation-engine.onrender.com - Docker Multi-Stage - Same as 97 Live 2m35s - Hybrid count 2 sorted 4.8 4.5 - Recommendation Pattern Collaborative Content Hybrid!
 
