@@ -20,7 +20,7 @@
 ![Status](https://img.shields.io/badge/Status-Recommendation%20Engine%20Live%20Tier%2010-brightgreen)
 ![Tier 10](https://img.shields.io/badge/Tier%2010-System%20Design%20Level%20SCALE-blueviolet)
 
-**Live URL:** https://nine8-recommendation-engine.onrender.com/
+**Live URL:** https://nine9-multi-tenant-saas.onrender.com/
 
 [![Live](https://img.shields.io/badge/Live-Render-brightgreen?style=for-the-badge&logo=render)](https://nine8-recommendation-engine.onrender.com)
 
@@ -439,7 +439,7 @@ If you found this project helpful, consider giving it a ⭐ Star on GitHub.
 
 **Single Repo:** [98-recommendation-engine](https://github.com/raviteja-dev950/98-recommendation-engine)
 
-**Live URL:** https://nine8-recommendation-engine.onrender.com/
+**Live URL:** https://nine9-multi-tenant-saas.onrender.com/
 
 **Deploy:** Deploy succeeded | Live Green Tick - DURATION 2m23s - DEPLOYED - TRIGGER First Deploy - SOURCE - Your service is live - Available at primary URL https://nine8-recommendation-engine.onrender.com - Docker Multi-Stage - Same as 97 Live 2m35s - Hybrid count 2 sorted 4.8 4.5 - Recommendation Pattern Collaborative Content Hybrid!
 
